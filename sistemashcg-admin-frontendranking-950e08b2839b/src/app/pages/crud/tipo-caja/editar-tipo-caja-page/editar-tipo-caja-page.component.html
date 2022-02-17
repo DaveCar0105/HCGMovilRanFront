@@ -1,0 +1,69 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+</div>
+
+
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <form [formGroup]="formularioFormGroup"
+        (ngSubmit)="onClickActualizar(formularioFormGroup.value)">
+    <!-- Table -->
+    <div class="row">
+      <div class="col">
+        <div class="card shadow">
+          <div class="card-header bg-transparent">
+            <h3 class="mb-0">Actualizar causa</h3>
+          </div>
+          <div class="card-body">
+            <div class="pl-lg-4">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="idTipoCaja">Identificador</label>
+                    <input type="text" id="idTipoCaja" formControlName="idTipoCaja"
+                           class="form-control form-control-alternative">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="fechaTipoCaja">Fecha de actualización</label>
+                      <input type="text" id="fechaTipoCaja" formControlName="fechaTipoCaja"
+                             class="form-control form-control-alternative">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="nombreTipoCaja">Nombre tipo de caja</label>
+                      <input type="text" id="nombreTipoCaja" formControlName="nombreTipoCaja"
+                             class="form-control form-control-alternative"
+                             [ngClass]="{ 'is-invalid': formularioFormGroup.get('nombreTipoCaja').errors&&
+                             formularioFormGroup.get('nombreTipoCaja').dirty  }">
+                      <div *ngIf="formularioFormGroup.get('nombreTipoCaja').errors&&
+                      formularioFormGroup.get('nombreTipoCaja').dirty"
+                           class="invalid-feedback">Ingrese este campo.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="estadoTipoCaja">Estado</label>
+                      <input type="text" id="estadoTipoCaja" formControlName="estadoTipoCaja"
+                             class="form-control form-control-alternative">
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <hr class="my-4"/>
+            <div class="row" style="float: right">
+              <div class="col-lg-3">
+                <h3 class="mb-0">
+                  <button type="submit" class="btn btn-outline-danger"><i class="far fa-edit"></i> Actualizar Tipo Caja
+                  </button>
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

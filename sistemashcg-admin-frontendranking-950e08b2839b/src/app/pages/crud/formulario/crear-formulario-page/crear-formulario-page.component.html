@@ -1,0 +1,166 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+</div>
+
+
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <form [formGroup]="formularioFormGroup"
+        (ngSubmit)="onClickGuardar(formularioFormGroup.value)">
+    <!-- Table -->
+    <div class="row">
+      <div class="col">
+        <div class="card shadow">
+          <div class="card-header bg-transparent">
+            <h3 class="mb-0">Formulario</h3>
+          </div>
+          <div class="card-body">
+            <div class="pl-lg-4">
+                <div class="row">
+                    <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="form-control-label" for="nombreFormulario">Nombre formulario</label>
+                        <input type="text" id="nombreFormulario" formControlName="nombreFormulario"
+                            class="form-control form-control-alternative"
+                            [ngClass]="{ 'is-invalid': formularioFormGroup.get('nombreFormulario').errors&&
+                            formularioFormGroup.get('nombreFormulario').dirty  }">
+                        <div *ngIf="formularioFormGroup.get('nombreFormulario').errors&&
+                        formularioFormGroup.get('nombreFormulario').dirty"
+                            class="invalid-feedback">Ingrese este campo.
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                        <label class="form-control-label" for="nombreDesplazarFormulario">Nombre mostrar formulario</label>
+                        <input type="text" id="nombreDesplazarFormulario" formControlName="nombreDesplazarFormulario"
+                                class="form-control form-control-alternative"
+                                [ngClass]="{ 'is-invalid': formularioFormGroup.get('nombreDesplazarFormulario').errors&&
+                                formularioFormGroup.get('nombreDesplazarFormulario').dirty  }">
+                        <div *ngIf="formularioFormGroup.get('nombreDesplazarFormulario').errors&&
+                        formularioFormGroup.get('nombreDesplazarFormulario').dirty"
+                            class="invalid-feedback">Ingrese este campo.
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-4"/>
+                <!-- Detalles -->
+                <div class="pl-lg-4">
+                <div class="row" style="padding: 5px">
+                    <div class="col-lg-3">
+                    <h3 class="mb-0">
+                        <button type="button" class="btn btn-outline-primary" data-toggle="modal"
+                                data-target="#modal_detalle"><i class="fas fa-plus-square"></i> Agregar Item
+                        </button>
+                    </h3>
+                    </div>
+                </div>
+                </div>
+            </div>
+            
+            <div class="pl-lg-4">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="table-responsive">
+                      <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                        <tr>
+                          <th scope="col">Nombre del item</th>
+                          <th scope="col">Subcategoria</th>
+                          <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let obj of itemsSelected">
+                          <td>{{obj.itemNombre}}</td>
+                          <td>{{getSucategoria(obj.idSubcategoria)}}</td>
+                          <td class="text-right">
+                            <a (click)="onClickEliminarItem(obj.id)" style="cursor: pointer"><i
+                                class="fa fa-trash fa-2x" ngbTooltip="Eliminar"
+                                aria-hidden="true"></i></a>
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <hr class="my-4"/>
+            <div class="row" style="float: right">
+              <div class="col-lg-3">
+                <h3 class="mb-0">
+                  <button type="submit" class="btn btn-outline-danger"><i class="far fa-save"></i> Guardar Formulario
+                  </button>
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<form [formGroup]="detalleFormularioFormGroup"
+      (ngSubmit)="onClickGuardarItem(detalleFormularioFormGroup.value)">
+  <div class="modal fade" id="modal_detalle" tabindex="-1" role="dialog" aria-labelledby="modal_detalle"
+       aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="modal_detalle_label">Nuevo Item</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label" for="nombreSubcategoria">Nombre de la subcategoria</label>
+                  <input type="text" id="nombreSubcategoria" formControlName="nombreSubcategoria"
+                         class="form-control form-control-alternative" list="listSubcategoria"
+                         (change)="onSelectedSubcategoria()"
+                         [ngClass]="{ 'is-invalid': detalleFormularioFormGroup.get('nombreSubcategoria').errors&&
+                         detalleFormularioFormGroup.get('nombreSubcategoria').dirty  }">
+                  <datalist id="listSubcategoria">
+                    <option *ngFor="let modelo of subcategorias"
+                            [value]="modelo.id+'-'+modelo.subcategoriaNombre">{{modelo.subcategoriaNombre}}
+                    </option>
+                  </datalist>
+                  <div *ngIf="detalleFormularioFormGroup.get('nombreSubcategoria').errors&&
+                  detalleFormularioFormGroup.get('nombreSubcategoria').dirty "
+                       class="invalid-feedback">Ingrese este campo.
+                  </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                  <label class="form-control-label" for="nombreItem">Nombre del item</label>
+                  <input type="text" id="nombreItem" formControlName="nombreItem"
+                         class="form-control form-control-alternative" list="listItems"
+                         (change)="onSelectedItem()"
+                         [ngClass]="{ 'is-invalid': detalleFormularioFormGroup.get('nombreItem').errors&&
+                         detalleFormularioFormGroup.get('nombreItem').dirty  }">
+                  <datalist id="listItems">
+                    <option *ngFor="let modelo of items"
+                            [value]="modelo.id+'-'+modelo.itemNombre">{{modelo.itemNombre}}
+                    </option>
+                  </datalist>
+                  <div *ngIf="detalleFormularioFormGroup.get('nombreItem').errors&&
+                  detalleFormularioFormGroup.get('nombreItem').dirty "
+                       class="invalid-feedback">Ingrese este campo.
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

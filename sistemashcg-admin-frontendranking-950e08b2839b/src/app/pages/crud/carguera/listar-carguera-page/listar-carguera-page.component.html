@@ -1,0 +1,73 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card shadow">
+        <div class="card-header bg-transparent">
+          <h3 class="mb-0">
+            Cargueras
+            <a href="#/crear-carguera" style="padding-left: 10px" >
+              <button class="btn btn-outline-danger"><i class="fas fa-plus-square"></i> Nuevo</button>
+            </a>
+          </h3>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+              <thead class="thead-light">
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Fecha actualización</th>
+                <th scope="col">Estado</th>
+                <th scope="col"></th>
+              </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let obj of cargueras">
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        <div class="media-body">
+                          <span class="mb-0 text-sm">{{obj.cargueraNombre}}</span>
+                        </div>
+                      </div>
+                    </th>
+                    <td>
+                      {{obtenerFecharString(obj.fechaHoraActualizacion)}}
+                    </td>
+                    <td>
+                      <div *ngIf="obj.estado===entidadDeshabilitado">
+                        <span class="badge badge-dot mr-4">
+                          <i class="bg-warning"></i> {{entidadTextDeshabilitado}}
+                        </span>
+                      </div>
+                      <div *ngIf="obj.estado===entidadHabilitado">
+                        <span class="badge badge-dot">
+                            <i class="bg-success"></i> {{entidadTextHabilitado}}
+                          </span>
+                      </div>
+                    </td>
+                    <td class="text-right">
+                      <div ngbDropdown placement="bottom-right">
+                        <a class="btn btn-sm btn-icon-only text-light"  ngbDropdownToggle>
+                          <i class="fas fa-ellipsis-v"></i>
+                        </a>
+                        <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
+                          <a class="dropdown-item" [routerLink]="['/editar-carguera',obj.id]" >Editar</a>
+                          <a class="dropdown-item"  *ngIf="obj.estado===entidadDeshabilitado" (click)="onClickHabilitar(obj.id)">Habilitar</a>
+                          <a class="dropdown-item"  *ngIf="obj.estado===entidadHabilitado" (click)="onClickDeshabilitar(obj.id)">Deshabilitar</a>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+          <hr class="my-4"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

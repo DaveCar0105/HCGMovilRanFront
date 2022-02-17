@@ -1,0 +1,102 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+</div>
+
+
+<!-- Page content -->
+<div class="container-fluid mt--7">
+  <form [formGroup]="formularioFormGroup"
+        (ngSubmit)="onClickActualizar(formularioFormGroup.value)">
+    <!-- Table -->
+    <div class="row">
+      <div class="col">
+        <div class="card shadow">
+          <div class="card-header bg-transparent">
+            <h3 class="mb-0">Actualizar usuario</h3>
+          </div>
+          <div class="card-body">
+            <div class="pl-lg-4">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label class="form-control-label" for="idUsuario">Identificador</label>
+                    <input type="text" id="idUsuario" formControlName="idUsuario"
+                           class="form-control form-control-alternative">
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="fechaUsuario">Fecha de actualización</label>
+                      <input type="text" id="fechaUsuario" formControlName="fechaUsuario"
+                             class="form-control form-control-alternative">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="nombreUsuario">Nombre usuario</label>
+                      <input type="text" id="nombreUsuario" formControlName="nombreUsuario"
+                             class="form-control form-control-alternative"
+                             [ngClass]="{ 'is-invalid': formularioFormGroup.get('nombreUsuario').errors&&
+                             formularioFormGroup.get('nombreUsuario').dirty  }">
+                      <div *ngIf="formularioFormGroup.get('nombreUsuario').errors&&
+                      formularioFormGroup.get('nombreUsuario').dirty"
+                           class="invalid-feedback">Ingrese este campo.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="codigoUsuario">Código usuario</label>
+                      <input type="text" id="codigoUsuario" formControlName="codigoUsuario"
+                             class="form-control form-control-alternative"
+                             [ngClass]="{ 'is-invalid': formularioFormGroup.get('codigoUsuario').errors&&
+                             formularioFormGroup.get('codigoUsuario').dirty  }">
+                      <div *ngIf="formularioFormGroup.get('codigoUsuario').errors&&
+                      formularioFormGroup.get('codigoUsuario').dirty"
+                           class="invalid-feedback">Ingrese este campo.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="usernameUsuario">Username usuario</label>
+                      <input type="text" id="usernameUsuario" formControlName="usernameUsuario"
+                             class="form-control form-control-alternative">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="passwordUsuario">Contraseña usuario</label>
+                      <input type="text" id="passwordUsuario" formControlName="passwordUsuario"
+                             class="form-control form-control-alternative"
+                             [ngClass]="{ 'is-invalid': formularioFormGroup.get('passwordUsuario').errors&&
+                             formularioFormGroup.get('passwordUsuario').dirty  }">
+                      <div *ngIf="formularioFormGroup.get('passwordUsuario').errors&&
+                      formularioFormGroup.get('passwordUsuario').dirty"
+                           class="invalid-feedback">Ingrese este campo.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="estadoUsuario">Estado</label>
+                      <input type="text" id="estadoUsuario" formControlName="estadoUsuario"
+                             class="form-control form-control-alternative">
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <hr class="my-4"/>
+            <div class="row" style="float: right">
+              <div class="col-lg-3">
+                <h3 class="mb-0">
+                  <button type="submit" class="btn btn-outline-danger"><i class="far fa-edit"></i> Actualizar Usuario
+                  </button>
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
