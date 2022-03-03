@@ -57,6 +57,7 @@ export class ItemRangoPageComponent implements OnInit {
     itemsLoad$.subscribe(
       (obj) => {
         this.items = obj;
+        console.log(this.items);
       },
       error1 => this.alertService.mensajeError(AppConstantMessaga.MENSAJE_ERROR_CONEXION_SERVIDOR)
     );
@@ -137,7 +138,7 @@ export class ItemRangoPageComponent implements OnInit {
 
   onSelectedItem() {
     if (this.formularioFormGroup.get('nombreItem')) {
-      const itemSelected = this.itemsSaveWithRange
+      const itemSelected = this.items
         .find(modelo => modelo.id + '-' + modelo.itemNombre === this.formularioFormGroup.get('nombreItem').value);
         if (itemSelected && itemSelected !== undefined) {
           this.idItemSelected = itemSelected.id;
